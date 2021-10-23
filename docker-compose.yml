@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  server:
+    build:
+      dockerfile: ./Dockerfile
+      context: .
+    container_name: challenge-backend
+    restart: unless-stopped
+    volumes:
+      - .:/var/www/src
+    ports:
+      - 30201:8000
+    environment:
+      DJANGO_SETTINGS_MODULE: Challenge.settings
+    networks:
+      - backend
+
+networks:
+  backend:
+    name: backend
+    driver: bridge
